@@ -17,8 +17,11 @@
     <link rel="stylesheet" href="css/style.css" />
     <title>Bootstrap Theme</title>
   </head>
-  <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <body data-spy="scroll" data-target="#main-nav" id="home">
+    <nav
+      id="main-nav"
+      class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top"
+    >
       <div class="container">
         <a href="index.html" class="navbar-brand">LoopLAB</a>
         <button
@@ -395,6 +398,28 @@
     <script>
       // Get the current year for the copyright
       $("#year").text(new Date().getFullYear());
+
+      // init scrollspy
+      $("body").scrollspy({ target: "#main-nav" });
+
+      // Smooth Scroll
+      $("#main-nav a").on("click", function (event) {
+        if (this.hash != "") {
+          event.preventDefault();
+
+          const hash = this.hash;
+
+          $("html, boyd").animate(
+            {
+              scrollTop: $(hash).offset().top,
+            },
+            800,
+            function () {
+              window.location.hash = hash;
+            }
+          );
+        }
+      });
     </script>
   </body>
 </html>
